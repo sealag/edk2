@@ -16,7 +16,6 @@ WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, EITHER EXPRESS OR IMPLIED.
 #include "String.h"
 #include "InternalBm.h"
 
-BOOLEAN mEnumBootDevice = FALSE;
 EFI_HII_HANDLE gBdsLibStringPackHandle = NULL;
 
 /**
@@ -3156,8 +3155,6 @@ BdsLibEnumerateAllBootOption (
   UINTN                         NumberFileSystemHandles;
   BOOLEAN                       NeedDelete;
   EFI_IMAGE_DOS_HEADER          DosHeader;
-  CHAR8                         *PlatLang;
-  CHAR8                         *LastLang;
   EFI_IMAGE_OPTIONAL_HEADER_UNION       HdrData;
   EFI_IMAGE_OPTIONAL_HEADER_PTR_UNION   Hdr;
 
@@ -3169,41 +3166,7 @@ BdsLibEnumerateAllBootOption (
   MiscNumber      = 0;
   ScsiNumber      = 0;
   NvmeNumber      = 0;
-  PlatLang        = NULL;
-  LastLang        = NULL;
   ZeroMem (Buffer, sizeof (Buffer));
-
-  //
-  // If the boot device enumerate happened, just get the boot
-  // device from the boot order variable
-  //
-  if (mEnumBootDevice) {
-    GetVariable2 (LAST_ENUM_LANGUAGE_VARIABLE_NAME, &gLastEnumLangGuid, (VOID**)&LastLang, NULL);
-    GetEfiGlobalVariable2 (L"PlatformLang", (VOID**)&PlatLang, NULL);
-    ASSERT (PlatLang != NULL);
-    if ((LastLang != NULL) && (AsciiStrCmp (LastLang, PlatLang) == 0)) {
-      Status = BdsLibBuildOptionFromVar (BdsBootOptionList, L"BootOrder");
-      FreePool (LastLang);
-      FreePool (PlatLang);
-      return Status;
-    } else {
-      Status = gRT->SetVariable (
-        LAST_ENUM_LANGUAGE_VARIABLE_NAME,
-        &gLastEnumLangGuid,
-        EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_NON_VOLATILE,
-        AsciiStrSize (PlatLang),
-        PlatLang
-        );
-      //
-      // Failure to set the variable only impacts the performance next time enumerating the boot options.
-      //
-
-      if (LastLang != NULL) {
-        FreePool (LastLang);
-      }
-      FreePool (PlatLang);
-    }
-  }
 
   //
   // Notes: this dirty code is to get the legacy boot option from the
@@ -3513,12 +3476,8 @@ BdsLibEnumerateAllBootOption (
   if (FvHandleCount != 0) {
     FreePool (FvHandleBuffer);
   }
-  //
-  // Make sure every boot only have one time
-  // boot device enumerate
-  //
+
   Status = BdsLibBuildOptionFromVar (BdsBootOptionList, L"BootOrder");
-  mEnumBootDevice = TRUE;
 
   return Status;
 }
