@@ -1200,9 +1200,11 @@ PlatformBdsEnterFrontPage (
   UINT64                             OsIndication;
   UINTN                              DataSize;
   EFI_INPUT_KEY                      Key;
+  LIST_ENTRY                         BootList;
 
   GraphicsOutput = NULL;
   SimpleTextOut = NULL;
+  InitializeListHead (&BootList);
 
   PERF_START (NULL, "BdsTimeOut", "BDS", 0);
   //
@@ -1331,6 +1333,11 @@ PlatformBdsEnterFrontPage (
 
   Status = EFI_SUCCESS;
   do {
+    //
+    // Check for device changes
+    //
+    BdsLibEnumerateAllBootOption (&BootList);
+
     //
     // Set proper video resolution and text mode for setup
     //
