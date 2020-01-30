@@ -195,6 +195,10 @@ GroupMultipleLegacyBootOption4SameType (
                 &BootOrderSize
                 );
 
+  if (BootOrder == NULL) {
+    return;
+  }
+
   for (Index = 0; Index < BootOrderSize / sizeof (UINT16); Index++) {
     UnicodeSPrint (OptionName, sizeof (OptionName), L"Boot%04x", BootOrder[Index]);
     InitializeListHead (&List);
