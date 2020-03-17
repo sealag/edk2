@@ -1100,13 +1100,13 @@ UpdateVariable (
 Store:
   // If the store is initialized
   // And we are storing or deleting a non volatile variable
-  // And variable name starts with 'Boot'
+  // And variable name doesn't start with  'Con'
   // Send the new data to SMMSTORE
   if (storeInitialized && (
       (Attributes & EFI_VARIABLE_NON_VOLATILE) != 0 || (
         Delete &&
         (Variable->CurrPtr->Attributes & EFI_VARIABLE_NON_VOLATILE) != 0
-      )) && (!StrnCmp(L"Boot", VariableName, StrLen(L"Boot")))
+      )) && (StrnCmp(L"Con", VariableName, StrLen(L"Con")))
     ) {
 
     /* TODO: add hook for logging nv changes here */
@@ -1979,8 +1979,8 @@ VariableCommonInitialize (
       EFI_GUID *guid = (EFI_GUID *)(buf + i + 8);
       VOID *data = (VOID *)(buf + i + 8 + keysz);
 
-      // only update Boot* variables 
-      if (!StrnCmp(L"Boot", varname, StrLen(L"Boot"))) {
+      // don't update console variables 
+      if (StrnCmp(L"Con", varname, StrLen(L"Con"))) {
         DEBUG ((DEBUG_WARN, "Fetching variable: %s\n", varname));
         DEBUG ((DEBUG_WARN, "buf: %p, buf+i: %p, guid: %p, varname: %p, data: %p\n", buf, buf + i, guid, varname, data));
         VARIABLE_POINTER_TRACK Variable;
@@ -1997,7 +1997,7 @@ VariableCommonInitialize (
           &Variable
         );
       } else {
-        DEBUG ((DEBUG_WARN, "Skipping non-Boot variable: %s\n", varname));
+        DEBUG ((DEBUG_WARN, "Skipping console variable: %s\n", varname));
       }
     }
     // no UEFI variable since it's at most the GUID part, so skip
