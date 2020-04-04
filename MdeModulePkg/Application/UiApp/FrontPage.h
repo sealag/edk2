@@ -33,8 +33,8 @@ extern EFI_FORM_BROWSER2_PROTOCOL  *gFormBrowser2;
 //
 #define FRONT_PAGE_FORM_ID  0x1000
 
-#define LABEL_FRANTPAGE_INFORMATION  0x1000
-#define LABEL_END                    0xffff
+#define LABEL_FRONTPAGE_INFORMATION    0x1000
+#define LABEL_END                      0xffff
 
 #define FRONT_PAGE_FORMSET_GUID \
   { \
