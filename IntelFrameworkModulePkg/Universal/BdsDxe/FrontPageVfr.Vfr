@@ -31,6 +31,7 @@
 #define FRONT_PAGE_KEY_BOOT_MANAGER    0x1064
 #define FRONT_PAGE_KEY_DEVICE_MANAGER  0x8567
 #define FRONT_PAGE_KEY_BOOT_MAINTAIN   0x9876
+#define FRONT_PAGE_KEY_CLEAR_BOOT      0x4321
 
 #define LABEL_SELECT_LANGUAGE          0x1000
 #define LABEL_TIMEOUT                  0x2000
@@ -88,6 +89,14 @@ formset
       help    = STRING_TOKEN(STR_BOOT_MAINT_MANAGER_HELP),
       flags   = INTERACTIVE,
       key     = FRONT_PAGE_KEY_BOOT_MAINTAIN;
+
+    subtitle text = STRING_TOKEN(STR_NULL_STRING);
+
+    text
+      help    = STRING_TOKEN(STR_CLEAR_BOOT_HELP),
+      text    = STRING_TOKEN(STR_CLEAR_BOOT_PROMPT),
+      flags   = INTERACTIVE,
+      key     = FRONT_PAGE_KEY_CLEAR_BOOT;
 
   endform;
 

@@ -70,6 +70,7 @@ extern UINT32    mSetupVerticalResolution;
 #define FRONT_PAGE_KEY_BOOT_MANAGER    0x1064
 #define FRONT_PAGE_KEY_DEVICE_MANAGER  0x8567
 #define FRONT_PAGE_KEY_BOOT_MAINTAIN   0x9876
+#define FRONT_PAGE_KEY_CLEAR_BOOT      0x4321
 
 #define LABEL_SELECT_LANGUAGE          0x1000
 #define LABEL_END                      0xffff

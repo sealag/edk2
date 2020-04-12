@@ -242,7 +242,12 @@ FrontPageCallback (
 
       FreePool (Lang);
       break;
-
+    case FRONT_PAGE_KEY_CLEAR_BOOT:
+      //
+      // Exit SendForm loop and process request
+      //
+      *ActionRequest = EFI_BROWSER_ACTION_REQUEST_EXIT;
+      break;
     default:
       break;
     }
@@ -1421,6 +1426,19 @@ PlatformBdsEnterFrontPage (
       // Display the Boot Maintenance Manager
       //
       BdsStartBootMaint ();
+      break;
+    case FRONT_PAGE_KEY_CLEAR_BOOT:
+      //
+      // Rebuild the BootOrder NVRAM variable
+      //
+      Var_ChangeBootOrder();
+      //
+      // Popup a menu to notice user
+      //
+      do {
+        CreatePopUp (EFI_LIGHTGRAY | EFI_BACKGROUND_BLUE, &Key, L"",
+              L"     Bootorder cleared/rebuilt. Press Enter to continue.     ", L"", NULL);
+      } while (Key.UnicodeChar != CHAR_CARRIAGE_RETURN);
       break;
     }
 
