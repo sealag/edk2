@@ -207,6 +207,13 @@
   TpmMeasurementLib|MdeModulePkg/Library/TpmMeasurementLibNull/TpmMeasurementLibNull.inf
   VarCheckLib|MdeModulePkg/Library/VarCheckLib/VarCheckLib.inf
 
+!if $(BOOTLOADER) == "COREBOOT"
+  SmmStoreLib|UefiPayloadPkg/Library/SMMStoreLib/SMMStoreLib.inf
+!endif
+!if $(BOOTLOADER) == "COREBOOT"
+  SmmStoreLib|UefiPayloadPkg/Library/SMMStoreLib/SMMStoreLib.inf
+!endif
+
 [LibraryClasses.IA32.SEC]
   DebugLib|MdePkg/Library/BaseDebugLibNull/BaseDebugLibNull.inf
   PcdLib|MdePkg/Library/BasePcdLibNull/BasePcdLibNull.inf
@@ -277,14 +284,11 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdConOutUgaSupport|FALSE
 
 [PcdsFixedAtBuild]
-  gEfiMdeModulePkgTokenSpaceGuid.PcdMaxVariableSize|0x10000
+  # UEFI spec: Minimal value is 0x8000!
+  gEfiMdeModulePkgTokenSpaceGuid.PcdMaxVariableSize|0x8000
+  gEfiMdeModulePkgTokenSpaceGuid.PcdMaxAuthVariableSize|0x8800
   gEfiMdeModulePkgTokenSpaceGuid.PcdMaxHardwareErrorVariableSize|0x8000
   gEfiMdeModulePkgTokenSpaceGuid.PcdVariableStoreSize|0x10000
-  #
-  # Make VariableRuntimeDxe work at emulated non-volatile variable mode.
-  #
-  gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvModeEnable|TRUE
-
   gEfiMdeModulePkgTokenSpaceGuid.PcdVpdBaseAddress|0x0
   gEfiMdeModulePkgTokenSpaceGuid.PcdUse1GPageTable|TRUE
   gEfiMdeModulePkgTokenSpaceGuid.PcdBootManagerMenuFile|{ 0x21, 0xaa, 0x2c, 0x46, 0x14, 0x76, 0x03, 0x45, 0x83, 0x6e, 0x8a, 0xb6, 0xf4, 0x66, 0x23, 0x31 }
@@ -343,10 +347,11 @@
 
 [PcdsDynamicDefault]
   gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvStoreReserved|0
-  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase64|0
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase|0
   gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingBase|0
   gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareBase|0
   gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut|2
+  gEfiMdeModulePkgTokenSpaceGuid.PcdEmuVariableNvModeEnable|FALSE
 
   ## This PCD defines the video horizontal resolution.
   #  This PCD could be set to 0 then video resolution could be at highest resolution.
@@ -392,6 +397,13 @@
   UefiPayloadPkg/BlSupportPei/BlSupportPei.inf
   MdeModulePkg/Core/DxeIplPeim/DxeIpl.inf
 
+  #
+  # SMMSTORE
+  #
+!if $(BOOTLOADER) == "COREBOOT"
+  UefiPayloadPkg/BlSMMStorePei/BlSMMStorePei.inf
+!endif
+
 [Components.X64]
   #
   # DXE Core
@@ -422,7 +434,11 @@
   MdeModulePkg/Universal/MonotonicCounterRuntimeDxe/MonotonicCounterRuntimeDxe.inf
   MdeModulePkg/Universal/ResetSystemRuntimeDxe/ResetSystemRuntimeDxe.inf
   PcAtChipsetPkg/PcatRealTimeClockRuntimeDxe/PcatRealTimeClockRuntimeDxe.inf
-  MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
+  MdeModulePkg/Universal/FaultTolerantWriteDxe/FaultTolerantWriteDxe.inf
+  MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf {
+    <LibraryClasses>
+      NULL|MdeModulePkg/Library/VarCheckUefiLib/VarCheckUefiLib.inf
+  }
 
   #
   # Following are the DXE drivers
@@ -512,6 +528,13 @@
   MdeModulePkg/Universal/Console/GraphicsConsoleDxe/GraphicsConsoleDxe.inf
   MdeModulePkg/Universal/Console/TerminalDxe/TerminalDxe.inf
   UefiPayloadPkg/GraphicsOutputDxe/GraphicsOutputDxe.inf
+
+  #
+  # SMMSTORE
+  #
+!if $(BOOTLOADER) == "COREBOOT"
+  UefiPayloadPkg/BlSMMStoreDxe/BlSMMStoreDxe.inf
+!endif
 
   #------------------------------
   #  Build the shell
