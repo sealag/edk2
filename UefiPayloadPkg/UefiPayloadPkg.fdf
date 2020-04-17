@@ -131,6 +131,7 @@ INF PcAtChipsetPkg/PcatRealTimeClockRuntimeDxe/PcatRealTimeClockRuntimeDxe.inf
 !endif
 
 !if $(VARIABLE_SUPPORT) == "EMU"
+  INF MdeModulePkg/Universal/FaultTolerantWriteDxe/FaultTolerantWriteDxe.inf
   INF MdeModulePkg/Universal/Variable/RuntimeDxe/VariableRuntimeDxe.inf
 !elseif $(VARIABLE_SUPPORT) == "SPI"
   INF UefiPayloadPkg/FvbRuntimeDxe/FvbSmm.inf
@@ -151,6 +152,7 @@ INF UefiPayloadPkg/BlSupportDxe/BlSupportDxe.inf
 
 INF MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
 INF MdeModulePkg/Logo/LogoDxe.inf
+INF UefiPayloadPkg/BlSMMStoreDxe/BlSMMStoreDxe.inf
 
 FILE FREEFORM = PCD(gEfiMdeModulePkgTokenSpaceGuid.PcdLogoFile) {
   SECTION RAW = MdeModulePkg/Logo/Logo.bmp
@@ -279,6 +281,19 @@ INF ShellPkg/DynamicCommand/DpDynamicCommand/DpDynamicCommand.inf
 INF ShellPkg/Application/Shell/Shell.inf
 !endif
 
+# Constraints:
+# PcdFlashNvStorageVariableSize <= FtwMaxBlockSize
+# GetNonVolatileMaxVariableSize () < (VariableStoreLength - sizeof (VARIABLE_STORE_HEADER))
+DEFINE BLOCK_SIZE        = 0x10000
+
+SET gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase = 0
+SET gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableSize = $(BLOCK_SIZE)
+
+SET gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingBase = gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase + gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableSize
+SET gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingSize = $(BLOCK_SIZE)
+
+SET gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareBase = gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingBase + gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingSize
+SET gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareSize = $(BLOCK_SIZE)
 
 ################################################################################
 #

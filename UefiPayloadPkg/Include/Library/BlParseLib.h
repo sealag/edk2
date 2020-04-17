@@ -16,6 +16,7 @@
 #include <Guid/AcpiBoardInfoGuid.h>
 #include <UniversalPayload/AcpiTable.h>
 #include <UniversalPayload/SmbiosTable.h>
+#include <Guid/SMMSTOREInfoGuid.h>
 
 #define GET_BOOTLOADER_PARAMETER()      PcdGet64 (PcdBootloaderParameter)
 
@@ -143,6 +144,21 @@ RETURN_STATUS
 EFIAPI
 ParseMiscInfo (
   VOID
+  );
+
+/**
+  Find the SMM store information
+
+  @param  SMMSTOREInfo       Pointer to the SMMSTORE_INFO structure
+
+  @retval RETURN_SUCCESS     Successfully find the SMM store buffer information.
+  @retval RETURN_NOT_FOUND   Failed to find the SMM store buffer information .
+
+**/
+RETURN_STATUS
+EFIAPI
+ParseSMMSTOREInfo (
+  OUT SMMSTORE_INFO       *SMMSTOREInfo
   );
 
 #endif
