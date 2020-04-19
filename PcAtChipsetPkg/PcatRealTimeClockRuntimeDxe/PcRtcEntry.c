@@ -132,7 +132,7 @@ InitializePcRtc (
   mModuleGlobal.CenturyRtcAddress = GetCenturyRtcAddress ();
 
   Status = PcRtcInit (&mModuleGlobal);
-  ASSERT_EFI_ERROR (Status);
+  //ASSERT_EFI_ERROR (Status);
 
   Status = gBS->CreateEventEx (
                   EVT_NOTIFY_SIGNAL,
@@ -142,7 +142,7 @@ InitializePcRtc (
                   &gEfiAcpi10TableGuid,
                   &Event
                   );
-  ASSERT_EFI_ERROR (Status);
+  //ASSERT_EFI_ERROR (Status);
 
   Status = gBS->CreateEventEx (
                   EVT_NOTIFY_SIGNAL,
@@ -152,7 +152,7 @@ InitializePcRtc (
                   &gEfiAcpiTableGuid,
                   &Event
                   );
-  ASSERT_EFI_ERROR (Status);
+  //ASSERT_EFI_ERROR (Status);
 
   gRT->GetTime       = PcRtcEfiGetTime;
   gRT->SetTime       = PcRtcEfiSetTime;
@@ -165,7 +165,7 @@ InitializePcRtc (
                   NULL,
                   NULL
                   );
-  ASSERT_EFI_ERROR (Status);
+  //ASSERT_EFI_ERROR (Status);
 
   return Status;
 }
