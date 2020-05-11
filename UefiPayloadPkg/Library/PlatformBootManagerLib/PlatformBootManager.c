@@ -324,6 +324,11 @@ PlatformBootManagerAfterConsole (
   //
   PlatformRegisterFvBootOption (&gUefiShellFileGuid, L"UEFI Shell", LOAD_OPTION_ACTIVE);
 
+  //
+  // Register iPXE
+  //
+  PlatformRegisterFvBootOption (PcdGetPtr (PcdiPXEFile), L"iPXE Network boot", LOAD_OPTION_ACTIVE);
+
   if (FixedPcdGetBool (PcdBootManagerEscape)) {
     Print (
       L"\n"
