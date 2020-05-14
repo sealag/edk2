@@ -579,6 +579,12 @@ UpdateFrontPageBannerStrings (
           StrCatS (NewString3, 0x60 / sizeof (CHAR16), L" (");
           StrCatS (NewString3, 0x60 / sizeof (CHAR16), NewString);
           StrCatS (NewString3, 0x60 / sizeof (CHAR16), L")");
+       } else if (!StrCmp(NewString2, L"LENOVO") || !StrCmp(NewString2, L"Lenovo")) {
+          StrIndex = SmbiosTable.Type1->Version;
+          GetOptionalStringByIndex ((CHAR8*)((UINT8*)SmbiosTable.Raw + SmbiosTable.Hdr->Length), StrIndex, &NewString);
+          StrCatS (NewString3, 0x60 / sizeof (CHAR16), NewString2);
+          StrCatS (NewString3, 0x60 / sizeof (CHAR16), L" ");
+          StrCatS (NewString3, 0x60 / sizeof (CHAR16), NewString);
        } else {
           StrCatS (NewString3, 0x60 / sizeof (CHAR16), NewString2);
           StrCatS (NewString3, 0x60 / sizeof (CHAR16), L" ");
