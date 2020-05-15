@@ -515,6 +515,8 @@
   UefiPayloadPkg/GraphicsOutputDxe/GraphicsOutputDxe.inf
 !endif
 
+  UefiPayloadPkg/PciPlatformDxe/PciPlatformDxe.inf
+
   #
   # Random Number Generator
   #
