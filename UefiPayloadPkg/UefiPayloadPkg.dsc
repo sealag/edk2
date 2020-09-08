@@ -395,6 +395,8 @@
 !if $(PERFORMANCE_MEASUREMENT_ENABLE)
   gEfiMdePkgTokenSpaceGuid.PcdPerformanceLibraryPropertyMask       | 0x1
 !endif
+  # Disable MTRR programming
+  gUefiCpuPkgTokenSpaceGuid.PcdCpuDisableMtrrProgramming|TRUE
 
 !if $(ABOVE_4G_MEMORY) == TRUE
   gUefiPayloadPkgTokenSpaceGuid.PcdAbove4GMemory|TRUE
