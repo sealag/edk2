@@ -85,7 +85,7 @@
   #
   # Shell options: [BUILD_SHELL, MIN_BIN, NONE, UEFI]
   #
-  DEFINE SHELL_TYPE              = UEFI_BIN
+  DEFINE SHELL_TYPE              = BUILD_SHELL
 
 [BuildOptions]
   *_*_*_CC_FLAGS                 = -D DISABLE_NEW_DEPRECATED_INTERFACES
