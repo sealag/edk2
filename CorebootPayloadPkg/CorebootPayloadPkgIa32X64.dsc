@@ -33,6 +33,8 @@
   DEFINE SECURE_BOOT_ENABLE      = FALSE
   DEFINE SOURCE_DEBUG_ENABLE     = FALSE
 
+  DEFINE PLATFORM_BOOT_TIMEOUT   = 3
+
   #
   # CPU options
   #
@@ -347,7 +349,7 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageVariableBase64|0
   gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwWorkingBase|0
   gEfiMdeModulePkgTokenSpaceGuid.PcdFlashNvStorageFtwSpareBase|0
-  gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut|3
+  gEfiMdePkgTokenSpaceGuid.PcdPlatformBootTimeOut|$(PLATFORM_BOOT_TIMEOUT)
 
   ## This PCD defines the video horizontal resolution.
   #  This PCD could be set to 0 then video resolution could be at highest resolution.
