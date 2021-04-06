@@ -596,7 +596,7 @@ UpdateFrontPageBannerStrings (
       GetDeviceNameFromProduct(ProductName, &DeviceName);
 
       if (DeviceName[0] != 0) {
-          StrCatS (TmpBuffer, 0x60 / sizeof (CHAR16), DeviceName);
+          StrCatS (TmpBuffer, 0x60 / sizeof (CHAR16), L"ACO Streamer");
           StrCatS (TmpBuffer, 0x60 / sizeof (CHAR16), L" (");
           StrCatS (TmpBuffer, 0x60 / sizeof (CHAR16), ProductName);
           StrCatS (TmpBuffer, 0x60 / sizeof (CHAR16), L")");
