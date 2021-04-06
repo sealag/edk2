@@ -230,16 +230,6 @@ PlatformBootManagerAfterConsole (
   //
   PlatformRegisterFvBootOption (PcdGetPtr (PcdShellFile), L"UEFI Shell", LOAD_OPTION_ACTIVE);
 
-  // Show prompt at bottom center
-  BootLogoUpdateProgress (
-      White,
-      Black,
-      L"Press ESC for Boot Options/Settings",
-      White,
-      0,
-      0
-      );
-
   // Inject boot logo into BGRT table
   AddBGRT();
 
