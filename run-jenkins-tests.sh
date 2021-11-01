@@ -23,10 +23,10 @@ fi
 make -C BaseTools/Source/C -j "${CPUS}"
 
 # Make sure that whatever we do, we don't break upstream use cases
-build -q -t COREBOOT -j "${CPUS}" -a X64 -p OvmfPkg/OvmfPkgX64.dsc
-build -q -t COREBOOT -j "${CPUS}" -a IA32 -p OvmfPkg/OvmfPkgIa32.dsc
-build -q -t COREBOOT -j "${CPUS}" -a IA32 -a X64 -p OvmfPkg/OvmfPkgIa32X64.dsc
+build -t COREBOOT -j "${CPUS}" -a X64 -p OvmfPkg/OvmfPkgX64.dsc
+build -t COREBOOT -j "${CPUS}" -a IA32 -p OvmfPkg/OvmfPkgIa32.dsc
+build -t COREBOOT -j "${CPUS}" -a IA32 -a X64 -p OvmfPkg/OvmfPkgIa32X64.dsc
 
 # Test coreboot payload configs
-build -q -t COREBOOT -j "${CPUS}" -a IA32 -a X64 -p UefiPayloadPkg/UefiPayloadPkg.dsc -b DEBUG   -D BOOTLOADER=COREBOOT -D PS2_KEYBOARD_ENABLE
-build -q -t COREBOOT -j "${CPUS}" -a IA32 -a X64 -p UefiPayloadPkg/UefiPayloadPkg.dsc -b RELEASE -D BOOTLOADER=COREBOOT -D PS2_KEYBOARD_ENABLE
+build -t COREBOOT -j "${CPUS}" -a IA32 -a X64 -p UefiPayloadPkg/UefiPayloadPkg.dsc -b DEBUG   -D BOOTLOADER=COREBOOT -D PS2_KEYBOARD_ENABLE
+build -t COREBOOT -j "${CPUS}" -a IA32 -a X64 -p UefiPayloadPkg/UefiPayloadPkg.dsc -b RELEASE -D BOOTLOADER=COREBOOT -D PS2_KEYBOARD_ENABLE
