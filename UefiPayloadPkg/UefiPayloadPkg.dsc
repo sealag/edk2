@@ -33,6 +33,8 @@
   DEFINE UNIVERSAL_PAYLOAD            = FALSE
   DEFINE SECURITY_STUB_ENABLE         = TRUE
   DEFINE SMM_SUPPORT                  = FALSE
+  DEFINE ABOVE_4G_MEMORY              = TRUE
+
   #
   # SBL:      UEFI payload for Slim Bootloader
   # COREBOOT: UEFI payload for coreboot
@@ -392,6 +394,12 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdEdkiiFpdtStringRecordEnableOnly| TRUE
 !if $(PERFORMANCE_MEASUREMENT_ENABLE)
   gEfiMdePkgTokenSpaceGuid.PcdPerformanceLibraryPropertyMask       | 0x1
+!endif
+
+!if $(ABOVE_4G_MEMORY) == TRUE
+  gUefiPayloadPkgTokenSpaceGuid.PcdAbove4GMemory|TRUE
+!else
+  gUefiPayloadPkgTokenSpaceGuid.PcdAbove4GMemory|FALSE
 !endif
 
 [PcdsPatchableInModule.X64]
