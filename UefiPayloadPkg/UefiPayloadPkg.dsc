@@ -34,6 +34,7 @@
   DEFINE SECURITY_STUB_ENABLE         = TRUE
   DEFINE SMM_SUPPORT                  = FALSE
   DEFINE ABOVE_4G_MEMORY              = TRUE
+  DEFINE BOOT_MANAGER_ESCAPE          = FALSE
   DEFINE PLATFORM_BOOT_TIMEOUT        = 3
   #
   # SBL:      UEFI payload for Slim Bootloader
@@ -402,6 +403,12 @@
   gUefiPayloadPkgTokenSpaceGuid.PcdAbove4GMemory|TRUE
 !else
   gUefiPayloadPkgTokenSpaceGuid.PcdAbove4GMemory|FALSE
+!endif
+
+!if $(BOOT_MANAGER_ESCAPE) == TRUE
+  gUefiPayloadPkgTokenSpaceGuid.PcdBootManagerEscape|TRUE
+!else
+  gUefiPayloadPkgTokenSpaceGuid.PcdBootManagerEscape|FALSE
 !endif
 
 [PcdsPatchableInModule.X64]
