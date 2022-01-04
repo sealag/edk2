@@ -35,6 +35,7 @@
   DEFINE SMM_SUPPORT                  = FALSE
   DEFINE ABOVE_4G_MEMORY              = TRUE
   DEFINE BOOT_MANAGER_ESCAPE          = FALSE
+  DEFINE FOLLOW_BGRT_SPEC             = TRUE
   DEFINE PLATFORM_BOOT_TIMEOUT        = 3
   #
   # SBL:      UEFI payload for Slim Bootloader
@@ -409,6 +410,12 @@
   gUefiPayloadPkgTokenSpaceGuid.PcdBootManagerEscape|TRUE
 !else
   gUefiPayloadPkgTokenSpaceGuid.PcdBootManagerEscape|FALSE
+!endif
+
+!if $(FOLLOW_BGRT_SPEC) == TRUE
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFollowBGRTSpec|TRUE
+!else
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFollowBGRTSpec|FALSE
 !endif
 
 [PcdsPatchableInModule.X64]

@@ -2079,6 +2079,9 @@
   # @Prompt Enable PCIe Resizable BAR Capability support.
   gEfiMdeModulePkgTokenSpaceGuid.PcdPcieResizableBarSupport|FALSE|BOOLEAN|0x10000024
 
+  # Follow BGRT Specifcation
+  gEfiMdeModulePkgTokenSpaceGuid.PcdFollowBGRTSpec|1|UINT32|0x00000021
+
 [PcdsPatchableInModule]
   ## Specify memory size with page number for PEI code when
   #  Loading Module at Fixed Address feature is enabled.
