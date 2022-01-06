@@ -35,6 +35,7 @@
   DEFINE SMM_SUPPORT                  = FALSE
   DEFINE ABOVE_4G_MEMORY              = TRUE
   DEFINE BOOT_MANAGER_ESCAPE          = FALSE
+  DEFINE BOOTSPLASH_IMAGE             = FALSE
   DEFINE USE_CBMEM_FOR_CONSOLE        = FALSE
   DEFINE FOLLOW_BGRT_SPEC             = TRUE
   DEFINE PLATFORM_BOOT_TIMEOUT        = 3
@@ -219,6 +220,7 @@
   CapsuleLib|MdeModulePkg/Library/DxeCapsuleLibNull/DxeCapsuleLibNull.inf
   SecurityManagementLib|MdeModulePkg/Library/DxeSecurityManagementLib/DxeSecurityManagementLib.inf
   UefiBootManagerLib|MdeModulePkg/Library/UefiBootManagerLib/UefiBootManagerLib.inf
+  BootLogoLib|MdeModulePkg/Library/BootLogoLib/BootLogoLib.inf
   CustomizedDisplayLib|MdeModulePkg/Library/CustomizedDisplayLib/CustomizedDisplayLib.inf
   FrameBufferBltLib|MdeModulePkg/Library/FrameBufferBltLib/FrameBufferBltLib.inf
 
@@ -472,6 +474,12 @@
   gEfiMdeModulePkgTokenSpaceGuid.PcdFollowBGRTSpec|FALSE
 !endif
 
+!if $(BOOTSPLASH_IMAGE) == TRUE
+  gUefiPayloadPkgTokenSpaceGuid.PcdBootSplashImage|TRUE
+!else
+  gUefiPayloadPkgTokenSpaceGuid.PcdBootSplashImage|FALSE
+!endif
+
 [PcdsPatchableInModule.X64]
   gPcAtChipsetPkgTokenSpaceGuid.PcdRtcIndexRegister|$(RTC_INDEX_REGISTER)
   gPcAtChipsetPkgTokenSpaceGuid.PcdRtcTargetRegister|$(RTC_TARGET_REGISTER)
@@ -635,6 +643,7 @@
 !endif
   UefiCpuPkg/CpuDxe/CpuDxe.inf
   MdeModulePkg/Universal/BdsDxe/BdsDxe.inf
+  MdeModulePkg/Logo/LogoDxe.inf
   MdeModulePkg/Application/UiApp/UiApp.inf {
     <LibraryClasses>
       NULL|MdeModulePkg/Library/DeviceManagerUiLib/DeviceManagerUiLib.inf

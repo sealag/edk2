@@ -251,6 +251,11 @@ PlatformBootManagerAfterConsole (
   Black.Blue = Black.Green = Black.Red = Black.Reserved = 0;
   White.Blue = White.Green = White.Red = White.Reserved = 0xFF;
 
+  if (FixedPcdGetBool (PcdBootSplashImage) == TRUE) {
+    gST->ConOut->ClearScreen (gST->ConOut);
+    BootLogoEnableLogo ();
+  };
+
   EfiBootManagerConnectAll ();
   EfiBootManagerRefreshAllBootOption ();
 
