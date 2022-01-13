@@ -519,6 +519,8 @@ UpdateFrontPageBannerStrings (
   UINT64                   InstalledMemory;
   BOOLEAN                  FoundCpu;
 
+  CHAR16 *ProductName;
+
   InstalledMemory = 0;
   FoundCpu        = 0;
 
@@ -565,7 +567,7 @@ UpdateFrontPageBannerStrings (
     }
 
     if (Record->Type == SMBIOS_TYPE_SYSTEM_INFORMATION) {
-      CHAR16 *ProductName;
+
       CHAR16 *Manufacturer;
       CHAR16 *DeviceName;
       CHAR16 *TmpBuffer;
@@ -598,7 +600,7 @@ UpdateFrontPageBannerStrings (
 
       HiiSetString (gFrontPagePrivate.HiiHandle, STRING_TOKEN (STR_FRONT_PAGE_COMPUTER_MODEL), TmpBuffer, NULL);
 
-      FreePool (ProductName);
+
       FreePool (Manufacturer);
       FreePool (DeviceName);
       FreePool (TmpBuffer);
@@ -649,6 +651,22 @@ UpdateFrontPageBannerStrings (
   ConvertMemorySizeToString ((UINT32)InstalledMemory, &NewString);
   HiiSetString (gFrontPagePrivate.HiiHandle, STRING_TOKEN (STR_FRONT_PAGE_MEMORY_SIZE), NewString, NULL);
   FreePool (NewString);
+
+  // glancealot customizations
+  if (StrCmp(ProductName, L"Relm") == 0)
+  {
+    CHAR16 *TmpBuffer = AllocateZeroPool (0xFF);
+    StrCpyS(TmpBuffer, 0xFF / sizeof (CHAR16), L"Acer Aspire 7 Education Edition 12");
+    HiiSetString (gFrontPagePrivate.HiiHandle, STRING_TOKEN (STR_FRONT_PAGE_COMPUTER_MODEL), TmpBuffer, NULL);
+    StrCpyS(TmpBuffer, 0xFF / sizeof (CHAR16), L"Release Year: 2019");
+    HiiSetString (gFrontPagePrivate.HiiHandle, STRING_TOKEN (STR_FRONT_PAGE_BIOS_VERSION), TmpBuffer, NULL);
+    StrCpyS(TmpBuffer, 0xFF / sizeof (CHAR16), L"OS: Windows 10 Professional 64-bit");
+    HiiSetString (gFrontPagePrivate.HiiHandle, STRING_TOKEN (STR_FRONT_PAGE_CPU_MODEL), TmpBuffer, NULL);
+    StrCpyS(TmpBuffer, 0xFF / sizeof (CHAR16), L"MSRP: $1499 CAD");
+    HiiSetString (gFrontPagePrivate.HiiHandle, STRING_TOKEN (STR_FRONT_PAGE_MEMORY_SIZE), TmpBuffer, NULL);
+    FreePool (TmpBuffer);
+  }
+  FreePool (ProductName);
 }
 
 /**
