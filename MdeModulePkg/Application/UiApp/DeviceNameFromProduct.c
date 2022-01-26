@@ -154,6 +154,8 @@ GetDeviceNameFromProduct (
     StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"Google Pixelbook 2017");
   } else if (!StrCmp(Product, L"Jax")) {
     StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"AOpen Chromebox Commercial 2");
+  } else if (!StrCmp(Product, L"Karma")) {
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"Acer Chromebase 24I2");
   } else if (!StrCmp(Product, L"Kench")) {
     StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"HP Chromebox G2");
   } else if (!StrCmp(Product, L"Nautilus")) {
