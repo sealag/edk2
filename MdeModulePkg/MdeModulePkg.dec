@@ -1077,8 +1077,11 @@
   # @Prompt Enable UEFI Stack Guard.
   gEfiMdeModulePkgTokenSpaceGuid.PcdCpuStackGuard|FALSE|BOOLEAN|0x30001055
 
-  # Prioritize Internal Devices
-  gEfiMdeModulePkgTokenSpaceGuid.PcdPrioritizeInternal|FALSE|BOOLEAN|0x00000031
+  ## Prioritize Internal Devices.
+  #  If enabled, internal devices will be prioritized over external devices in the boot order.<BR><BR>
+  #   TRUE  - Internal devices are prioritized.<BR>
+  #   FALSE - Internal devices are not prioritized.<BR>
+  gEfiMdeModulePkgTokenSpaceGuid.PcdPrioritizeInternal|FALSE|BOOLEAN|0x30001057
 
 [PcdsFixedAtBuild, PcdsPatchableInModule]
   ## Dynamic type PCD can be registered callback function for Pcd setting action.
