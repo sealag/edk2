@@ -14,6 +14,7 @@
 #include <Library/IoLib.h>
 #include <Library/HobLib.h>
 #include <Library/BlParseLib.h>
+#include <Library/SmmStoreParseLib.h>
 #include <IndustryStandard/Acpi.h>
 #include <UniversalPayload/PciRootBridges.h>
 
@@ -288,4 +289,19 @@ ParseMiscInfo (
   }
 
   return Status;
+}
+
+/**
+  Find the video frame buffer device information
+  @param  SMMSTOREInfo       Pointer to the SMMSTORE_INFO structure
+  @retval RETURN_SUCCESS     Successfully find the Smm store buffer information.
+  @retval RETURN_NOT_FOUND   Failed to find the Smm store buffer information .
+**/
+RETURN_STATUS
+EFIAPI
+ParseSmmStoreInfo (
+  OUT SMMSTORE_INFO  *SMMSTOREInfo
+  )
+{
+  return RETURN_NOT_FOUND;
 }
