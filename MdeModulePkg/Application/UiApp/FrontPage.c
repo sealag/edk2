@@ -666,6 +666,19 @@ UpdateFrontPageBannerStrings (
     HiiSetString (gFrontPagePrivate.HiiHandle, STRING_TOKEN (STR_FRONT_PAGE_MEMORY_SIZE), TmpBuffer, NULL);
     FreePool (TmpBuffer);
   }
+  if (StrCmp(ProductName, L"Teemo") == 0)
+  {
+    CHAR16 *TmpBuffer = AllocateZeroPool (0xFF);
+    StrCpyS(TmpBuffer, 0xFF / sizeof (CHAR16), L"ASUS VivoMini Elite");
+    HiiSetString (gFrontPagePrivate.HiiHandle, STRING_TOKEN (STR_FRONT_PAGE_COMPUTER_MODEL), TmpBuffer, NULL);
+    StrCpyS(TmpBuffer, 0xFF / sizeof (CHAR16), L"Release Year: 2021");
+    HiiSetString (gFrontPagePrivate.HiiHandle, STRING_TOKEN (STR_FRONT_PAGE_BIOS_VERSION), TmpBuffer, NULL);
+    StrCpyS(TmpBuffer, 0xFF / sizeof (CHAR16), L"OS: Windows 11 Professional 64-bit");
+    HiiSetString (gFrontPagePrivate.HiiHandle, STRING_TOKEN (STR_FRONT_PAGE_CPU_MODEL), TmpBuffer, NULL);
+    StrCpyS(TmpBuffer, 0xFF / sizeof (CHAR16), L"MSRP: $1499");
+    HiiSetString (gFrontPagePrivate.HiiHandle, STRING_TOKEN (STR_FRONT_PAGE_MEMORY_SIZE), TmpBuffer, NULL);
+    FreePool (TmpBuffer);
+  }
   FreePool (ProductName);
 }
 
