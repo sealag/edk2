@@ -10,6 +10,7 @@ SPDX-License-Identifier: BSD-2-Clause-Patent
 #include "PlatformBootManager.h"
 #include "PlatformConsole.h"
 #include <Protocol/PlatformBootManagerOverride.h>
+#include <Guid/GlobalVariable.h>
 
 UNIVERSAL_PAYLOAD_PLATFORM_BOOT_MANAGER_OVERRIDE_PROTOCOL  *mUniversalPayloadPlatformBootManagerOverrideInstance = NULL;
 
@@ -245,6 +246,18 @@ PlatformBootManagerAfterConsole (
 
   // invoke SMM handler to put BYT eMMC/SD devices into ACPI mode for OS
   IoWrite8(0xb2, 0xcd);
+
+  // force-set secureboot variables so Linux doesn't mistakenly think SB is enabled
+  UINT8 SetupMode = 1;
+  UINT8 SecureBoot = 0;
+  gRT->SetVariable (EFI_SECURE_BOOT_MODE_NAME, 
+           &gEfiGlobalVariableGuid,
+           EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS,
+           sizeof SecureBoot, &SecureBoot);
+  gRT->SetVariable (EFI_SETUP_MODE_NAME, 
+           &gEfiGlobalVariableGuid,
+           EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS,
+           sizeof SetupMode, &SetupMode);   
 }
 
 /**
