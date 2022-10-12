@@ -463,19 +463,9 @@ XhcGetRootHubPortStatus (
   //
   // Poll the root port status register to enable/disable corresponding device slot if there is a device attached/detached.
   // For those devices behind hub, we get its attach/detach event by hooking Get_Port_Status request at control transfer for those hub.
-  // Save the status so we can reset the port on error.
   //
   ParentRouteChart.Dword = 0;
-  Status = XhcPollPortStatusChange (Xhc, ParentRouteChart, PortNumber, PortStatus);
-
-  //
-  // Force resetting the port by clearing the USB_PORT_STAT_C_RESET bit in PortChangeStatus
-  // when XhcPollPortStatusChange fails
-  //
-  if (EFI_ERROR (Status)) {
-    PortStatus->PortChangeStatus &= ~(USB_PORT_STAT_C_RESET);
-    Status = EFI_SUCCESS;
-  }
+  XhcPollPortStatusChange (Xhc, ParentRouteChart, PortNumber, PortStatus);
 
 ON_EXIT:
   gBS->RestoreTPL (OldTpl);
