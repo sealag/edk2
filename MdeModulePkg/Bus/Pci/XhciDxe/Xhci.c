@@ -471,16 +471,7 @@ XhcGetRootHubPortStatus (
   // For those devices behind hub, we get its attach/detach event by hooking Get_Port_Status request at control transfer for those hub.
   //
   ParentRouteChart.Dword = 0;
-  Status                 = XhcPollPortStatusChange (Xhc, ParentRouteChart, PortNumber, PortStatus);
-
-  //
-  // Force resetting the port by clearing the USB_PORT_STAT_C_RESET bit in PortChangeStatus
-  // when XhcPollPortStatusChange fails
-  //
-  if (EFI_ERROR (Status)) {
-    PortStatus->PortChangeStatus &= ~(USB_PORT_STAT_C_RESET);
-    Status                        = EFI_SUCCESS;
-  }
+  XhcPollPortStatusChange (Xhc, ParentRouteChart, PortNumber, PortStatus);
 
 ON_EXIT:
   gBS->RestoreTPL (OldTpl);
@@ -915,16 +906,19 @@ XhcControlTransfer (
     return EFI_INVALID_PARAMETER;
   }
 
-  // Check for valid maximum packet size
-  if ((DeviceSpeed == EFI_USB_SPEED_SUPER) && (MaximumPacketLength > 1024)) {
+  if ((MaximumPacketLength != 8)  && (MaximumPacketLength != 16) &&
+      (MaximumPacketLength != 32) && (MaximumPacketLength != 64) &&
+      (MaximumPacketLength != 512)
+      )
+  {
     return EFI_INVALID_PARAMETER;
   }
 
-  if ((DeviceSpeed == EFI_USB_SPEED_HIGH) && (MaximumPacketLength > 512)) {
+  if ((DeviceSpeed == EFI_USB_SPEED_LOW) && (MaximumPacketLength != 8)) {
     return EFI_INVALID_PARAMETER;
   }
 
-  if ((DeviceSpeed == EFI_USB_SPEED_FULL) && (MaximumPacketLength > 64)) {
+  if ((DeviceSpeed == EFI_USB_SPEED_SUPER) && (MaximumPacketLength != 512)) {
     return EFI_INVALID_PARAMETER;
   }
 
