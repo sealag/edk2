@@ -636,6 +636,7 @@ XhcGetSupportedProtocolCapabilityAddr (
   @param  Xhc            The XHCI Instance.
   @param  ExtCapOffset   The USB Major Version in xHCI Support Protocol Capability Field
   @param  PortSpeed      The Port Speed Field in USB PortSc register
+  @param  PortNumber     The Port Number (0-indexed)
 
   @return The Protocol Speed ID (PSI) from xHCI Supported Protocol capability register.
 
@@ -644,12 +645,15 @@ UINT32
 XhciPsivGetPsid (
   IN USB_XHCI_INSTANCE  *Xhc,
   IN UINT32             ExtCapOffset,
-  IN UINT8              PortSpeed
+  IN UINT8              PortSpeed,
+  IN UINT8              PortNumber
   )
 {
   XHC_SUPPORTED_PROTOCOL_DW2                PortId;
   XHC_SUPPORTED_PROTOCOL_PROTOCOL_SPEED_ID  Reg;
   UINT32                                    Count;
+  UINT32                                    MinPortIndex;  
+  UINT32                                    MaxPortIndex;
 
   if ((Xhc == NULL) || (ExtCapOffset == 0xFFFFFFFF)) {
     return 0;
@@ -662,6 +666,18 @@ XhciPsivGetPsid (
   // 2. The PSID register boundary should be Base address + PSIC * 0x04
   //
   PortId.Dword = XhcReadExtCapReg (Xhc, ExtCapOffset + XHC_SUPPORTED_PROTOCOL_DW2_OFFSET);
+
+  //
+  // According to XHCI 1.1 spec November 2017,
+  // valid values for CompPortOffset are 1 to CompPortCount.
+  // PortNumber is zero-indexed, so subtract 1 from min/max.
+  //
+  MinPortIndex = PortId.Data.CompPortOffset - 1;
+  MaxPortIndex = MinPortIndex + PortId.Data.CompPortCount - 1;
+
+  if ((PortNumber < MinPortIndex) || (PortNumber > MaxPortIndex)) {
+	return 0;
+  }
 
   for (Count = 0; Count < PortId.Data.Psic; Count++) {
     Reg.Dword = XhcReadExtCapReg (Xhc, ExtCapOffset + XHC_SUPPORTED_PROTOCOL_PSI_OFFSET + (Count << 2));
@@ -685,7 +701,8 @@ XhciPsivGetPsid (
 UINT16
 XhcCheckUsbPortSpeedUsedPsic (
   IN USB_XHCI_INSTANCE  *Xhc,
-  IN UINT8              PortSpeed
+  IN UINT8              PortSpeed,
+  IN UINT8              PortNumber
   )
 {
   XHC_SUPPORTED_PROTOCOL_PROTOCOL_SPEED_ID  SpField;
@@ -703,7 +720,7 @@ XhcCheckUsbPortSpeedUsedPsic (
   // PortSpeed definition when the Major Revision is 03h.
   //
   if (Xhc->Usb3SupOffset != 0xFFFFFFFF) {
-    SpField.Dword = XhciPsivGetPsid (Xhc, Xhc->Usb3SupOffset, PortSpeed);
+    SpField.Dword = XhciPsivGetPsid (Xhc, Xhc->Usb3SupOffset, PortSpeed, PortNumber);
     if (SpField.Dword != 0) {
       //
       // Found the corresponding PORTSC value in PSIV field of USB3 offset.
@@ -717,7 +734,7 @@ XhcCheckUsbPortSpeedUsedPsic (
   // PortSpeed definition when the Major Revision is 02h.
   //
   if ((UsbSpeedIdMap == 0) && (Xhc->Usb2SupOffset != 0xFFFFFFFF)) {
-    SpField.Dword = XhciPsivGetPsid (Xhc, Xhc->Usb2SupOffset, PortSpeed);
+    SpField.Dword = XhciPsivGetPsid (Xhc, Xhc->Usb2SupOffset, PortSpeed, PortNumber);
     if (SpField.Dword != 0) {
       //
       // Found the corresponding PORTSC value in PSIV field of USB2 offset.

@@ -632,7 +632,8 @@ XhcGetSupportedProtocolCapabilityAddr (
 UINT16
 XhcCheckUsbPortSpeedUsedPsic (
   IN USB_XHCI_INSTANCE  *Xhc,
-  IN UINT8              Speed
+  IN UINT8              Speed,
+  IN UINT8              PortNumber
   );
 
 #endif
