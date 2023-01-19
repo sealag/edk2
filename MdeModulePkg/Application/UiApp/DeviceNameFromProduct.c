@@ -372,16 +372,30 @@ GetDeviceNameFromProduct (
     StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"Acer Chromebook 317");
   }
   //Tigerlake
-    else if (!StrCmp(Product, L"Delbin")) {
-    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"ASUS Chromebook Flip CX5");
+    else if (!StrCmp(Product, L"Chronicler")) {
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"FMV Chromebook 14F	");
+  } else if (!StrCmp(Product, L"Collis")) {
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"Asus Chromebook Flip CX3");
+  } else if (!StrCmp(Product, L"Copano")) {
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"Asus Chromebook Flip CX5 [CX5400]");
+  } else if (!StrCmp(Product, L"Delbin")) {
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"ASUS Chromebook Flip CX55/CX5/C536");
   } else if (!StrCmp(Product, L"Drobit")) {
-    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"ASUS Chromebook CX9400");
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"ASUS Chromebook CX9 [CX9400]");
+  } else if (!StrCmp(Product, L"Eldrid")) {
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"HP Chromebook x360 14c");
   } else if (!StrCmp(Product, L"Elemi")) {
     StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"HP Pro c640 G2 Chromebook");
   } else if (!StrCmp(Product, L"Lillipup")) {
     StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"IdeaPad Flex 5i Chromebook");
+  } else if (!StrCmp(Product, L"Lindar")) {
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"Lenovo 5i-14 Chromebook");
+  } else if (!StrCmp(Product, L"Voema")) {
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"Acer Chromebook Spin 514 [CB514-2H]");
+  } else if (!StrCmp(Product, L"Volet")) {
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"Acer Chromebook 515 [CB515-1W/1WT]");
   } else if (!StrCmp(Product, L"Volta")) {
-    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"Acer Chromebook 514 [CB514-1H]");
+    StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"Acer Chromebook 514 [CB514-1W/1WT]");
   } else if (!StrCmp(Product, L"Voxel")) {
     StrCatS (*DeviceName, 0x60 / sizeof (CHAR16), L"Acer Chromebook Spin 713 [CP713-3W]");
   }
