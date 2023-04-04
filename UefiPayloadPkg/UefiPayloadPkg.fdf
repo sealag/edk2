@@ -410,6 +410,7 @@ INF MdeModulePkg/Application/BootManagerMenuApp/BootManagerMenuApp.inf
   INF  UefiPayloadPkg/SecureBootEnrollDefaultKeys/SecureBootSetup.inf
 
   FILE FREEFORM = A23665E3-ACA6-4F6D-80CC-341E7D7B8CC6 {
+    SECTION RAW = UefiPayloadPkg/SecureBootEnrollDefaultKeys/keys/kek-system76.crt
     SECTION RAW = UefiPayloadPkg/SecureBootEnrollDefaultKeys/keys/kek.crt
     SECTION UI = "SecureBootKekCert"
   }
@@ -425,6 +426,7 @@ INF MdeModulePkg/Application/BootManagerMenuApp/BootManagerMenuApp.inf
   }
 
   FILE FREEFORM = 91D2E32B-0134-4306-BA90-54EDCBF349CA {
+    SECTION RAW = UefiPayloadPkg/SecureBootEnrollDefaultKeys/keys/db-system76.crt
     SECTION RAW = UefiPayloadPkg/SecureBootEnrollDefaultKeys/keys/db-2.crt
     SECTION UI = "SecureBootDb2Cert"
   }
