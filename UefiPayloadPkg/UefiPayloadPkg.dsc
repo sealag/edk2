@@ -1105,6 +1105,11 @@
     <LibraryClasses>
       Tpm12DeviceLib|SecurityPkg/Library/Tpm12DeviceLibDTpm/Tpm12DeviceLibDTpm.inf
   }
+   SecurityPkg/Tcg/TcgConfigDxe/TcgConfigDxe.inf {
+    <LibraryClasses>
+    Tpm12DeviceLib|SecurityPkg/Library/Tpm12DeviceLibTcg/Tpm12DeviceLibTcg.inf
+  }
+
 !endif
 
   #------------------------------
