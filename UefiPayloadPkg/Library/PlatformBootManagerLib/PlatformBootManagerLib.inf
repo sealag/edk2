@@ -51,6 +51,7 @@
   PlatformHookLib
   HobLib
   IoLib
+  TcgPhysicalPresenceLib
   Tcg2PhysicalPresenceLib
 
 [Guids]
