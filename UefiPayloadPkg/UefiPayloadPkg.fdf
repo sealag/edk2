@@ -429,6 +429,11 @@ INF MdeModulePkg/Application/BootManagerMenuApp/BootManagerMenuApp.inf
     SECTION PE32 = UefiPayloadPkg/NetworkDrivers/AX88772C_772B_772A_UEFI_V2.8.0_X64.efi
   }
 !endif
+!if $(NETWORK_INTEL_IGB)
+  FILE DRIVER = 184B14A2-9796-40D1-BA51-6D7A07DBB378 {
+    SECTION PE32 = UefiPayloadPkg/NetworkDrivers/e9862x3.efi
+  }
+!endif
 !endif
 !endif
 
