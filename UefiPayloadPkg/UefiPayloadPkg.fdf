@@ -434,6 +434,11 @@ INF MdeModulePkg/Application/BootManagerMenuApp/BootManagerMenuApp.inf
     SECTION PE32 = UefiPayloadPkg/NetworkDrivers/e9862x3.efi
   }
 !endif
+!if $(NETWORK_INTEL_IGC)
+  FILE DRIVER = 6C1EAFA3-A6B6-4D29-ADB3-6F31320E4AC6 {
+    SECTION PE32 = UefiPayloadPkg/NetworkDrivers/igc-105.efi
+  }
+!endif
 !endif
 !endif
 
