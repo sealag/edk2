@@ -1,0 +1,23 @@
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = SerialPortConfigDxe
+  FILE_GUID                      = f1ad84ef-4d0c-466f-bd69-a4efff2d4cb1
+  MODULE_TYPE                    = UEFI_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = SerialPortConfigDxeEntryPoint
+
+[Sources]
+  SerialPortConfigDxe.c
+  SerialPortConfig.vfr
+  SerialPortConfigStrings.uni
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  UefiDriverEntryPoint
+  HiiLib
+
+[Guids]
+  gEfiHiiPlatformSetupFormsetGuid                ## CONSUMES ##

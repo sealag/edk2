@@ -1,0 +1,44 @@
+#include <Uefi/UefiMultiPhase.h>
+#include "AdvancedCpuConfigNvData.h"
+
+formset
+  guid      = ADVANCED_CPU_CONFIG_FORM_SET_GUID,
+  title     = STRING_TOKEN(STR_ADVANCED_CPU_CONFIG_TITLE),
+  help      = STRING_TOKEN(STR_ADVANCED_CPU_CONFIG_HELP),
+  classguid = EFI_HII_PLATFORM_SETUP_FORMSET_GUID,
+
+  efivarstore ADVANCED_CPU_CONFIGURATION,
+    attribute = EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_NON_VOLATILE,
+    name  = AdvancedCpuConfig,
+    guid  = ADVANCED_CPU_CONFIG_FORM_SET_GUID;
+
+  //
+  // ##1 Form "Advanced CPU Configuration"
+  //
+  form formid = 1,
+    title = STRING_TOKEN(STR_ADVANCED_CPU_CONFIG_TITLE);
+
+    //
+    // Display of Numeric: 'Long Duration Power Limit (W) [PL1]'
+    //
+    numeric
+      varid = AdvancedCpuConfig.PL1,
+      prompt = STRING_TOKEN(STR_PL1_PROMPT),
+      help = STRING_TOKEN(STR_PL1_HELP),
+      minimum = 3,
+      maximum = 25,
+    endnumeric;
+
+    //
+    // Display of Numeric: 'Short Duration Power Limit (W) [PL2]'
+    //
+    numeric
+      varid = AdvancedCpuConfig.PL2,
+      prompt = STRING_TOKEN(STR_PL2_PROMPT),
+      help = STRING_TOKEN(STR_PL2_HELP),
+      minimum = 3,
+      maximum = 35,
+    endnumeric;
+
+  endform;
+endformset;

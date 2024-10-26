@@ -1,0 +1,47 @@
+#langdef en-US "English"
+
+#string STR_SERIAL_PORT_CONFIG_TITLE    #language en-US "Serial Port Configuration"
+#string STR_SERIAL_PORT_CONFIG_HELP     #language en-US "Configure the device serial ports."
+
+#string STR_NULL                        #language en-US ""
+
+#string STR_COM1_MODE_SELECT_PROMPT     #language en-US "COM1 Mode"
+#string STR_COM1_MODE_SELECT_HELP       #language en-US "Select the transceiver mode for the COM1 port."
+
+#string STR_COM2_MODE_SELECT_PROMPT     #language en-US "COM2 Mode"
+#string STR_COM2_MODE_SELECT_HELP       #language en-US "Select the transceiver mode for the COM2 port."
+
+#string STR_COM3_MODE_SELECT_PROMPT     #language en-US "COM3 Mode"
+#string STR_COM3_MODE_SELECT_HELP       #language en-US "Select the transceiver mode for the COM3 port."
+
+#string STR_COM4_MODE_SELECT_PROMPT     #language en-US "COM4 Mode"
+#string STR_COM4_MODE_SELECT_HELP       #language en-US "Select the transceiver mode for the COM4 port."
+
+#string STR_COM_MODE_SELECT_RS232       #language en-US "RS-232"
+#string STR_COM_MODE_SELECT_RS485       #language en-US "RS-485"
+#string STR_COM_MODE_SELECT_DISABLED    #language en-US "Disabled"
+
+#string STR_COM1_SLEW_RATE_PROMPT       #language en-US "Limit COM1 Slew Rate"
+#string STR_COM1_SLEW_RATE_HELP         #language en-US "Select this option to limit the COM1 port slew rate to 250 kbps."
+
+#string STR_COM2_SLEW_RATE_PROMPT       #language en-US "Limit COM2 Slew Rate"
+#string STR_COM2_SLEW_RATE_HELP         #language en-US "Select this option to limit the COM2 port slew rate to 250 kbps."
+
+#string STR_COM3_SLEW_RATE_PROMPT       #language en-US "Limit COM3 Slew Rate"
+#string STR_COM3_SLEW_RATE_HELP         #language en-US "Select this option to limit the COM3 port slew rate to 250 kbps."
+
+#string STR_COM4_SLEW_RATE_PROMPT       #language en-US "Limit COM4 Slew Rate"
+#string STR_COM4_SLEW_RATE_HELP         #language en-US "Select this option to limit the COM4 port slew rate to 250 kbps."
+
+#string STR_COM1_BIAS_TERM_PROMPT       #language en-US "COM1 Bias/Termination Resistors"
+#string STR_COM1_BIAS_TERM_HELP         #language en-US "Enable the internal RS-485 bias and termination resistors on the COM1 port."
+
+#string STR_COM2_BIAS_TERM_PROMPT       #language en-US "COM2 Bias/Termination Resistors"
+#string STR_COM2_BIAS_TERM_HELP         #language en-US "Enable the internal RS-485 bias and termination resistors on the COM2 port."
+
+#string STR_COM3_BIAS_TERM_PROMPT       #language en-US "COM3 Bias/Termination Resistors"
+#string STR_COM3_BIAS_TERM_HELP         #language en-US "Enable the internal RS-485 bias and termination resistors on the COM3 port."
+
+#string STR_COM4_BIAS_TERM_PROMPT       #language en-US "COM4 Bias/Termination Resistors"
+#string STR_COM4_BIAS_TERM_HELP         #language en-US "Enable the internal RS-485 bias and termination resistors on the COM4 port."
+

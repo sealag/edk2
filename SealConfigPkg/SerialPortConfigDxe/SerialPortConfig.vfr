@@ -1,0 +1,172 @@
+#include <Uefi/UefiMultiPhase.h>
+#include "SerialPortConfigNvData.h"
+
+formset
+  guid      = SERIAL_PORT_CONFIG_FORM_SET_GUID,
+  title     = STRING_TOKEN(STR_SERIAL_PORT_CONFIG_TITLE),
+  help      = STRING_TOKEN(STR_SERIAL_PORT_CONFIG_HELP),
+  classguid = EFI_HII_PLATFORM_SETUP_FORMSET_GUID,
+
+  efivarstore SERIAL_PORT_CONFIGURATION,
+    attribute = EFI_VARIABLE_RUNTIME_ACCESS | EFI_VARIABLE_BOOTSERVICE_ACCESS | EFI_VARIABLE_NON_VOLATILE,
+    name  = SerialPortConfig,
+    guid  = SERIAL_PORT_CONFIG_FORM_SET_GUID;
+
+  //
+  // ##1 Form "Serial Port Configuration"
+  //
+  form formid = 1,
+    title = STRING_TOKEN(STR_SERIAL_PORT_CONFIG_TITLE);
+
+    //
+    // Display of Oneof: 'COM1 Mode'
+    //
+    oneof
+      name = Com1Mode,
+      varid = SerialPortConfig.Port[0].Mode,
+      prompt = STRING_TOKEN(STR_COM1_MODE_SELECT_PROMPT),
+      help = STRING_TOKEN(STR_COM1_MODE_SELECT_HELP),
+      flags = NUMERIC_SIZE_1 | INTERACTIVE | RESET_REQUIRED,
+      option text = STRING_TOKEN(STR_COM_MODE_SELECT_DISABLED), value = COM_MODE_SELECT_DISABLED, flags = 0;
+      option text = STRING_TOKEN(STR_COM_MODE_SELECT_RS232), value = COM_MODE_SELECT_RS232, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_COM_MODE_SELECT_RS485), value = COM_MODE_SELECT_RS485, flags = 0;
+    endoneof;
+
+    //
+    // Display of Checkbox: 'Limit COM1 Slew Rate'
+    //
+    suppressif questionref(Com1Mode) == COM_MODE_SELECT_DISABLED;
+    checkbox varid = SerialPortConfig.Port[0].LimitSlewRate,
+      prompt = STRING_TOKEN(STR_COM1_SLEW_RATE_PROMPT),
+      help = STRING_TOKEN(STR_COM1_SLEW_RATE_HELP),
+      flags = INTERACTIVE | RESET_REQUIRED,
+    endcheckbox;
+    endif;
+
+    //
+    // Display of Checkbox: 'COM1 Bias/Termination Resistors'
+    //
+    suppressif questionref(Com1Mode) != COM_MODE_SELECT_RS485;
+    checkbox varid = SerialPortConfig.Port[0].EnableBiasTermResistors,
+      prompt = STRING_TOKEN(STR_COM1_BIAS_TERM_PROMPT),
+      help = STRING_TOKEN(STR_COM1_BIAS_TERM_HELP),
+      flags = INTERACTIVE | RESET_REQUIRED,
+    endcheckbox;
+    endif;
+
+    subtitle text = STRING_TOKEN(STR_NULL);
+
+    //
+    // Display of Oneof: 'COM2 Mode'
+    //
+    oneof
+      name = Com2Mode,
+      varid = SerialPortConfig.Port[1].Mode,
+      prompt = STRING_TOKEN(STR_COM2_MODE_SELECT_PROMPT),
+      help = STRING_TOKEN(STR_COM2_MODE_SELECT_HELP),
+      flags = NUMERIC_SIZE_1 | INTERACTIVE | RESET_REQUIRED,
+      option text = STRING_TOKEN(STR_COM_MODE_SELECT_DISABLED), value = COM_MODE_SELECT_DISABLED, flags = 0;
+      option text = STRING_TOKEN(STR_COM_MODE_SELECT_RS232), value = COM_MODE_SELECT_RS232, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_COM_MODE_SELECT_RS485), value = COM_MODE_SELECT_RS485, flags = 0;
+    endoneof;
+
+    //
+    // Display of Checkbox: 'Limit COM2 Slew Rate'
+    //
+    suppressif questionref(Com2Mode) == COM_MODE_SELECT_DISABLED;
+    checkbox varid = SerialPortConfig.Port[1].LimitSlewRate,
+      prompt = STRING_TOKEN(STR_COM2_SLEW_RATE_PROMPT),
+      help = STRING_TOKEN(STR_COM2_SLEW_RATE_HELP),
+      flags = INTERACTIVE | RESET_REQUIRED,
+    endcheckbox;
+    endif;
+
+    //
+    // Display of Checkbox: 'COM2 Bias/Termination Resistors'
+    //
+    suppressif questionref(Com2Mode) != COM_MODE_SELECT_RS485;
+    checkbox varid = SerialPortConfig.Port[1].EnableBiasTermResistors,
+      prompt = STRING_TOKEN(STR_COM2_BIAS_TERM_PROMPT),
+      help = STRING_TOKEN(STR_COM2_BIAS_TERM_HELP),
+      flags = INTERACTIVE | RESET_REQUIRED,
+    endcheckbox;
+    endif;
+
+    subtitle text = STRING_TOKEN(STR_NULL);
+
+    //
+    // Display of Oneof: 'COM3 Mode'
+    //
+    oneof
+      name = Com3Mode,
+      varid = SerialPortConfig.Port[2].Mode,
+      prompt = STRING_TOKEN(STR_COM3_MODE_SELECT_PROMPT),
+      help = STRING_TOKEN(STR_COM3_MODE_SELECT_HELP),
+      flags = NUMERIC_SIZE_1 | INTERACTIVE | RESET_REQUIRED,
+      option text = STRING_TOKEN(STR_COM_MODE_SELECT_DISABLED), value = COM_MODE_SELECT_DISABLED, flags = 0;
+      option text = STRING_TOKEN(STR_COM_MODE_SELECT_RS232), value = COM_MODE_SELECT_RS232, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_COM_MODE_SELECT_RS485), value = COM_MODE_SELECT_RS485, flags = 0;
+    endoneof;
+
+    //
+    // Display of Checkbox: 'Limit COM3 Slew Rate'
+    //
+    suppressif questionref(Com3Mode) == COM_MODE_SELECT_DISABLED;
+    checkbox varid = SerialPortConfig.Port[2].LimitSlewRate,
+      prompt = STRING_TOKEN(STR_COM3_SLEW_RATE_PROMPT),
+      help = STRING_TOKEN(STR_COM3_SLEW_RATE_HELP),
+      flags = INTERACTIVE | RESET_REQUIRED,
+    endcheckbox;
+    endif;
+
+    //
+    // Display of Checkbox: 'COM3 Bias/Termination Resistors'
+    //
+    suppressif questionref(Com3Mode) != COM_MODE_SELECT_RS485;
+    checkbox varid = SerialPortConfig.Port[2].EnableBiasTermResistors,
+      prompt = STRING_TOKEN(STR_COM3_BIAS_TERM_PROMPT),
+      help = STRING_TOKEN(STR_COM3_BIAS_TERM_HELP),
+      flags = INTERACTIVE | RESET_REQUIRED,
+    endcheckbox;
+    endif;
+
+    subtitle text = STRING_TOKEN(STR_NULL);
+
+    //
+    // Display of Oneof: 'COM4 Mode'
+    //
+    oneof
+      name = Com4Mode,
+      varid = SerialPortConfig.Port[3].Mode,
+      prompt = STRING_TOKEN(STR_COM4_MODE_SELECT_PROMPT),
+      help = STRING_TOKEN(STR_COM4_MODE_SELECT_HELP),
+      flags = NUMERIC_SIZE_1 | INTERACTIVE | RESET_REQUIRED,
+      option text = STRING_TOKEN(STR_COM_MODE_SELECT_DISABLED), value = COM_MODE_SELECT_DISABLED, flags = 0;
+      option text = STRING_TOKEN(STR_COM_MODE_SELECT_RS232), value = COM_MODE_SELECT_RS232, flags = DEFAULT;
+      option text = STRING_TOKEN(STR_COM_MODE_SELECT_RS485), value = COM_MODE_SELECT_RS485, flags = 0;
+    endoneof;
+
+    //
+    // Display of Checkbox: 'Limit COM4 Slew Rate'
+    //
+    suppressif questionref(Com4Mode) == COM_MODE_SELECT_DISABLED;
+    checkbox varid = SerialPortConfig.Port[3].LimitSlewRate,
+      prompt = STRING_TOKEN(STR_COM4_SLEW_RATE_PROMPT),
+      help = STRING_TOKEN(STR_COM4_SLEW_RATE_HELP),
+      flags = INTERACTIVE | RESET_REQUIRED,
+    endcheckbox;
+    endif;
+
+    //
+    // Display of Checkbox: 'COM4 Bias/Termination Resistors'
+    //
+    suppressif questionref(Com4Mode) != COM_MODE_SELECT_RS485;
+    checkbox varid = SerialPortConfig.Port[3].EnableBiasTermResistors,
+      prompt = STRING_TOKEN(STR_COM4_BIAS_TERM_PROMPT),
+      help = STRING_TOKEN(STR_COM4_BIAS_TERM_HELP),
+      flags = INTERACTIVE | RESET_REQUIRED,
+    endcheckbox;
+    endif;
+
+  endform;
+endformset;

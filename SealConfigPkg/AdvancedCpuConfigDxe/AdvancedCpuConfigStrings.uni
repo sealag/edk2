@@ -1,0 +1,12 @@
+#langdef en-US "English"
+
+#string STR_ADVANCED_CPU_CONFIG_TITLE    #language en-US "Advanced CPU Configuration"
+#string STR_ADVANCED_CPU_CONFIG_HELP     #language en-US "Configure advanced CPU settings."
+
+#string STR_NULL                        #language en-US ""
+
+#string STR_PL1_PROMPT                  #language en-US "Long Duration Power Limit (W) [PL1]"
+#string STR_PL1_HELP                    #language en-US "Set the PL1 power limit of the CPU."
+
+#string STR_PL2_PROMPT                  #language en-US "Short Duration Power Limit (W) [PL2]"
+#string STR_PL2_HELP                    #language en-US "Set the PL2 power limit of the CPU."
