@@ -243,6 +243,9 @@ INF MdeModulePkg/Universal/SmbiosDxe/SmbiosDxe.inf
 INF MdeModulePkg/Logo/LogoDxe.inf
 !endif
 
+INF SealConfigPkg/AdvancedCpuConfigDxe/AdvancedCpuConfigDxe.inf
+INF SealConfigPkg/SerialPortConfigDxe/SerialPortConfigDxe.inf
+
 #
 # PCI Support
 #

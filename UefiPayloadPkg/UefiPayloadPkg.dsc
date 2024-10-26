@@ -888,6 +888,8 @@
   }
   MdeModulePkg/Application/BootManagerMenuApp/BootManagerMenuApp.inf
 
+  SealConfigPkg/AdvancedCpuConfigDxe/AdvancedCpuConfigDxe.inf
+  SealConfigPkg/SerialPortConfigDxe/SerialPortConfigDxe.inf
 
 !if $(TIMER_SUPPORT) == "HPET"
   PcAtChipsetPkg/HpetTimerDxe/HpetTimerDxe.inf
