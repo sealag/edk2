@@ -47,6 +47,7 @@
   DEFINE LOCKBOX_SUPPORT              = FALSE
   DEFINE FOLLOW_BGRT_SPEC             = FALSE
   DEFINE USE_PCO_MMIO_EMMC            = FALSE
+  DEFINE LOAD_OPTION_ROMS             = FALSE
 
   #
   # Crypto Support
@@ -1087,6 +1088,10 @@
   UefiPayloadPkg/PlatformGopPolicy/PlatformGopPolicy.inf
 !else
   UefiPayloadPkg/GraphicsOutputDxe/GraphicsOutputDxe.inf
+!endif
+
+!if $(LOAD_OPTION_ROMS) == TRUE
+  UefiPayloadPkg/PciPlatformDxe/PciPlatformDxe.inf
 !endif
 
 !if $(PERFORMANCE_MEASUREMENT_ENABLE)
